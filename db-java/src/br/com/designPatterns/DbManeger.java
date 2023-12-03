@@ -17,13 +17,14 @@ public class DbManeger {
 
 
         try {
-            InputStream input = new FileInputStream("src/resources/config.properties");
+            InputStream input = new FileInputStream("db-java/src/resources/config.properties");
             props.load(input);
             final String url = props.getProperty("db.url");
             final String user = props.getProperty("db.user");
             final String password = props.getProperty("db.password");
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, user,password);
+            System.out.println("Succesfully connected!");
         } catch (Exception e) {
             e.printStackTrace();
         }

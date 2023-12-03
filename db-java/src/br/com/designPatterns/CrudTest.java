@@ -1,19 +1,36 @@
 package br.com.designPatterns;
 
-import java.io.InputStream;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Properties;
+import br.com.designPatterns.dao.ProductDAO;
+import br.com.designPatterns.dao.ProductDAOImpl;
+
+import java.util.List;
 
 public class CrudTest {
 
     public static void main(String[] args) {
         try {
-            Connection connection = DbManeger.getConnection();
-            System.out.println("Successfully connected");
+            // chamando o nosso dao implementando
+            final ProductDAO productDAO = new ProductDAOImpl();
 
+            // chamando a classe produto
+            Product product = new Product();
+            product.setName("Limão");
+            product.setPrice("10.00");
+            product.setQuantity(12);
+
+
+            // salvando
+            // productDAO.save(product);
+
+            // product.setQuantity(18);
+            // productDAO.update(product, 1);
+
+            List<Product> products = productDAO.getAll();
+
+            // for com variável item dentro de product ele pega cada um deles e transforma em string
+            for (Product item : products) {
+                System.out.println(item.toString());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
